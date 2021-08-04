@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center; background-color: grey;}
+* {
+  box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left, .right {
+  width: 10%;
+}
+
+.middle {
+  width: 80%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+    <title>React Widget Example</title>
+</head>
+<body>
+    <h1>Hello! This is some static content</h1>
+<div class="row">
+  <div class="column left">this is your site</div>
+<div class="column middle" id="stockmarket"></div> 
+  <div class="column right">this is your site</div>
+</div>
+         
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./widget/runtime-main.c9157bc5.js"></script>
+    <script src="./widget/2.edae58c4.chunk.js"></script>
+    <script src="./widget/main.49e3067d.chunk.js"></script>
+</body>
+</html>
