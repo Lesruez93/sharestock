@@ -6,14 +6,14 @@ import PortfolioPage from './Portfolio';
 import PricePage from './home';
 import PayPage from "./paynow";
 import {Eye, Mail} from 'react-feather';
-import {Affix, Button, Form, Input, Menu, message, Popover, Row, } from 'antd';
+import {Affix, Button, Card, Form, Input, Menu, message, Popover, Row,} from 'antd';
 import 'antd/dist/antd.css';
 import './index.css'
 import {AppstoreOutlined,SnippetsOutlined, DollarCircleOutlined , SwapOutlined,  BgColorsOutlined} from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 import { SketchPicker } from 'react-color'
 import { Typography } from 'antd';
-import {baseUrl, Post, verifyToken,} from './utils';
+import {baseUrl, centerStyle, Post, verifyToken,} from './utils';
 import cookie from 'js-cookie';
 import {GlobalStyles} from "./GlobalStyles";
 
@@ -56,6 +56,7 @@ function App(props, context ) {
 
     const rightStyle = { position: 'absolute', top: 0, right: 0 };
     const fab = { position: 'absolute', top: 40, right: 20 };
+    const mnu = { position: 'absolute', top: 0 };
 
 
 
@@ -209,9 +210,10 @@ function App(props, context ) {
             <GlobalStyles />
             <div style={{background:backgroundColor}}  className="scrollable-container"  ref={setContainer}>
 
-                {profile  ? (
+                {!profile  ? (
                         <RouterMem>
-                            <Menu   style={centerStyle}  mode="horizontal">
+                     <div >
+                         <Menu   style={centerStyle}  mode="horizontal">
 
                                 <Menu.Item style={{rightStyle}} >
                                     <div>
@@ -274,8 +276,6 @@ function App(props, context ) {
                             {/*<Link to="/statement" style={{margin: '10px'}}>Statement</Link>*/}
                             {/*<Link to="/portfolio" style={{margin: '10px'}}>Portfolio</Link>*/}
                             {/*<Link to="/pay" style={{margin: '10px'}}>Transfer</Link>*/}
-
-
                        <div  >
                            <Menu theme={'dark'}  style={centerStyle2}  onClick={handleClick} selectedKeys={['price']} mode="horizontal">
 
@@ -323,8 +323,7 @@ function App(props, context ) {
                             </Menu>
 
                        </div>
-
-
+                     </div>
                             <Route exact path="/" component={PricePage} />
                             <Route exact path="/orders" render={(props) => <OrderPage profile={profile}/>} />
                             <Route exact path="/statement" render={(props) => <StatementPage profile={profile}/>} />
@@ -333,14 +332,10 @@ function App(props, context ) {
 
                         </RouterMem> ) :
                     (
-                        <Row
-                            type="flex"
-                            width="100%"
-                            justify="center"
-                            className="px-3 bg-white mh-page"
-                            style={{minHeight: '100vh'}}
-                        >
+                        <div className="text-center">
                             <Form  layout="vertical"
+
+
                                    onSubmit={e => {
                                        e.preventDefault();
 
@@ -349,10 +344,12 @@ function App(props, context ) {
                                    }}
                             >
 
-                                <div style={{ justify: "center"}}>
 
-                                    <FormItem label="UserName">
+                                    <Card  style={{ centerStyle }}>
+
+                                    <FormItem >
                                         <Input
+                                            style={{width: '30%'}}
                                             prefix={
                                                 <Mail
                                                     size={16}
@@ -366,8 +363,9 @@ function App(props, context ) {
                                         />
                                     </FormItem>
 
-                                    <FormItem label="Password">
+                                    <FormItem >
                                         <Input
+                                            style={{width: '30%'}}
                                             prefix={
                                                 <Eye
                                                     size={16}
@@ -380,18 +378,20 @@ function App(props, context ) {
                                             onChange={e => setPass(e.target.value)}
                                         />
                                     </FormItem>
-                                    <Button loading={loading} type="primary" onClick={e => {
+                                        <div className="text-center">
+                                    <Button loading={loading}  type="primary" onClick={e => {
                                         e.preventDefault();
 
                                         login()
 
                                     }}>Login</Button>
-
-                                </div>
+                                        </div>
+                                </Card>
 
 
                             </Form>
-                        </Row>
+                        </div>
+
                     )  }
                 <Affix  style={fab}>
                     <Popover content={backgroundContent} title="Theme" trigger="click">
