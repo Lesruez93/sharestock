@@ -6,18 +6,20 @@ import PortfolioPage from './Portfolio';
 import PricePage from './home';
 import PayPage from "./paynow";
 import {Eye, Mail} from 'react-feather';
-import {Affix, Button, Form, Input, Menu, message, Popover, Row} from 'antd';
+import {Affix, Button, Form, Input, Menu, message, Popover, Row, } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css'
 import {AppstoreOutlined,SnippetsOutlined, DollarCircleOutlined , SwapOutlined,  BgColorsOutlined} from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 import { SketchPicker } from 'react-color'
-
+import { Typography } from 'antd';
 import {baseUrl, Post, verifyToken,} from './utils';
 import cookie from 'js-cookie';
 import {GlobalStyles} from "./GlobalStyles";
 
 const { SubMenu } = Menu;
+const { Title} = Typography;
+const {Text  } = Typography;
 
 const FormItem = Form.Item;
 var token = "";
@@ -222,25 +224,50 @@ function App(props, context ) {
                                     </div>
                                 </Menu.Item>
 
-                            <table style={{width: '40%'}} >
+                            {/*<table style={{width: '40%'}} >*/}
 
-                                    <tr style={{"margin-right":'20px'}} >
-                                        <th  style={{width: '5%', textAlign:'right'}}>Balance</th>
-                                        <th  style={{width: '5%', textAlign:'right'}}>Unsettled</th>
-                                        <th  style={{width: '5%', textAlign:'right'}}>Holdings</th>
-                                        <th  style={{width: '5%', textAlign:'right'}}>Available</th>
-                                    </tr>
+                            {/*   */}
+                            {/*        /!*<tr style={{"margin-right":'20px'}} >*!/*/}
+                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Balance</th>*!/*/}
+                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Unsettled</th>*!/*/}
+                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Holdings</th>*!/*/}
+                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Available</th>*!/*/}
+                            {/*        /!*</tr>*!/*/}
 
-                                    <tr >
-                                        <td style={{width: '5%', textAlign:'right'}} >{bal}</td>
-                                        <td style={{width: '5%', textAlign:'right'}}>0.00</td>
-                                        <td style={{width: '5%', textAlign:'right'}}>0.00</td>
-                                        <td style={{width: '5%', textAlign:'right'}}>{bal}</td>
-                                    </tr>
+                            {/*        /!*<tr  >*!/*/}
+                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}} >{bal}</td>*!/*/}
+                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>0.00</td>*!/*/}
+                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>0.00</td>*!/*/}
+                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>{bal}</td>*!/*/}
+                            {/*        /!*</tr>*!/*/}
 
-                                </table>
+                            {/*    </table>*/}
 
+                                <Menu.Item  >
+                                    <div>
+                                        <Title level={5}>  <h5>Balance</h5></Title>
+                                        <Text  className="p">0.00</Text>
+                                    </div>
+                                </Menu.Item>
 
+                                <Menu.Item  >
+                                    <div>
+                                        <Title level={5}>     <h5>Unsettled</h5></Title>
+                                        <Text  className="p">0.00</Text>
+                                    </div>
+                                </Menu.Item>
+                                <Menu.Item  >
+                                <div>
+                                    <Title level={5}> <h5>Holdings</h5></Title>
+                                    <Text  className="p">0.00</Text>
+                                </div>
+                            </Menu.Item>
+                                <Menu.Item  >
+                                <div>
+                                    <Title level={5}>   <h5>Available</h5></Title>
+                                    <Text  className="p">  0.00</Text>
+                                </div>
+                            </Menu.Item>
 </Menu>
                             {/*<Link to="/" style={{margin: '10px'}}>Prices</Link>*/}
                             {/*<Link to="/orders" style={{margin: '10px'}}>Place Orders</Link>*/}

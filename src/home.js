@@ -30,15 +30,21 @@ const securities = async () =>  {
   }).catch(error => {
     console.error(error.headers);
   });
-  let result = await API.json();
-  // ClientType = result;
+  try {
 
-  const resd = result.map(item => {
-   // ClientType.push(item.code);
-     const  code  = item.code
-  return { code }
- })
- setClientType(result)
+
+      let result = await API.json();
+      // ClientType = result;
+
+      const resd = result.map(item => {
+          // ClientType.push(item.code);
+          const code = item.code
+          return {code}
+      })
+      setClientType(result)
+  }catch (e) {
+      
+  }
 }
 
  const chart = async () =>  {
@@ -61,21 +67,28 @@ const securities = async () =>  {
   }).catch(error => {
     console.error(error.headers);
   });
-  let result = await API.json();
-  var prices = [];
-  var dates = [];
-  var result1 = result.map(item => {
-    prices.push(item.Price);
-    const { Price } = item
-    return { Price }
-})
+ try {
 
- result1 = result.map(item => {
-  dates.push(item.priceDate);
-  const  priceDate  = item.priceDate
-  return { priceDate }
-})
-    console.log(security)
+     let result = await API.json();
+     var prices = [];
+     var dates = [];
+     var result1 = result.map(item => {
+         prices.push(item.Price);
+         const { Price } = item
+         return { Price }
+     })
+
+     result1 = result.map(item => {
+         dates.push(item.priceDate);
+         const  priceDate  = item.priceDate
+         return { priceDate }
+     })
+ }
+ catch (e) {
+     
+ }
+
+ 
    
    setChartData({
     labels: dates,

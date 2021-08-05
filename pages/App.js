@@ -3,7 +3,7 @@ import { Link, MemoryRouter as Router, Route } from "react-router-dom";
 import AboutPage from './AboutPage';
 import IndexPage from './home';
 import {Eye, Mail} from 'react-feather';
-import {Button,  Form, Input, message, Row} from 'antd';
+import {Button, Card, Form, Input, message, Row} from 'antd';
 import 'antd/dist/antd.css';
 
 import {absoluteUrl, getAppCookies, verifyToken,} from '../src/utils';
@@ -67,7 +67,7 @@ function App( props,{ form }) {
             <button onClick={() => setCount(count + 1)}>+1</button>
             <button onClick={() => setCount(count - 1)}>-1</button>
 
-            {profile ? ( 
+            {profile ? (
             <Router>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
@@ -92,7 +92,7 @@ function App( props,{ form }) {
                 >
   
         <div style={{ justify: "center"}}>
-             
+             <Card>
               <FormItem label="UserName">
                         <Input
                             prefix={
@@ -120,8 +120,8 @@ function App( props,{ form }) {
                             placeholder="Password"
                         />
                 </FormItem>
-              <Button loading={loading} type="primary" htmlType="submit">Login</Button>
-
+              <Button loading={loading} class="tect-center" type="primary" htmlType="submit">Login</Button>
+             </Card>
             </div>
         
 

@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useCallback } from 'react';
-import {Button, Form, Input, Select, Row, List, Typography, Table} from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Form, Table} from 'antd';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {baseUrl} from "./utils";
