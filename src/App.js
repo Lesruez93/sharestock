@@ -210,7 +210,7 @@ function App(props, context ) {
             <GlobalStyles />
             <div style={{background:backgroundColor}}  className="scrollable-container"  ref={setContainer}>
 
-                {!profile  ? (
+                {profile  ? (
                         <RouterMem>
                      <div >
                          <Menu   style={centerStyle}  mode="horizontal">
