@@ -36,22 +36,63 @@ function App(props, context ) {
     const [userName, setUsername] = useState()
     const [container, setContainer] = useState(null);
     const [key, setKey] = useState("/");
-    const [background,setBackground] = useState( '#FFFFFF' );
-    const [backgroundColor,setBackgroundColor] = useState( '#F0F0F0' );
-    const [background2,setBackground2] = useState( '#07c7ff' );
+    const [background,setBackground] = useState( localStorage.getItem('background') );
+    const [backgroundColor,setBackgroundColor] = useState( localStorage.getItem('backgroundColor') );
+    const [background2,setBackground2] = useState( localStorage.getItem('background2') );
+
+
+    useEffect(()=>{
+        if (!localStorage.getItem('background2')){
+            setBackground2('#000000')
+            localStorage.setItem('background2', '#000000')
+        }
+    },[])
+
+
+
+    useEffect(()=>{
+        if (!localStorage.getItem('background')){
+            setBackground('#FFFFFF')
+            localStorage.setItem('background', '#FFFFFF')
+        }
+    },[])
+
+
+    useEffect(()=>{
+        if (!localStorage.getItem('backgroundColor')){
+            setBackgroundColor('#f6f3f3')
+            localStorage.setItem('backgroundColor', '#f6f3f3')
+        }
+    },[])
+
     const  handleChangeComplete2 = (color) => {
 
-        setBackground2(color.hex );
+        try {
+            setBackground2(color.hex);
+            localStorage.setItem('background2', color.hex)
+        }catch (e) {
+
+        }
     };
 
     const  handleChangeComplete = (color) => {
+        try{
+            setBackground(color.hex );
+            localStorage.setItem('background',color.hex)
 
-        setBackground(color.hex );
+        }catch (e) {
+
+        }
+
     };
 
     const  handleChangeCompleteBgColor = (color) => {
+        try {
+            setBackgroundColor(color.hex);
+            localStorage.setItem('backgroundColor', color.hex)
+        }catch (e) {
 
-        setBackgroundColor(color.hex );
+        }
     };
 
     const rightStyle = { position: 'absolute', top: 0, right: 0 };
@@ -135,7 +176,7 @@ function App(props, context ) {
         //     //   });
         //     //  let result = await API.json();
         Post(myObjStr).then(result=>{
-          //  setSecurity(result)
+            //  setSecurity(result)
             if(result.length > 0) {setBal(result[0].Expr1)}
         }).catch(er=>{
 
@@ -166,10 +207,10 @@ function App(props, context ) {
 
     const content = (
         <div>
-          <SketchPicker
-              color={background }
-              onChangeComplete={handleChangeComplete }
-          />
+            <SketchPicker
+                color={background }
+                onChangeComplete={handleChangeComplete }
+            />
         </div>
     );
 
@@ -212,118 +253,118 @@ function App(props, context ) {
 
                 {profile  ? (
                         <RouterMem>
-                     <div >
-                         <Menu   style={centerStyle}  mode="horizontal">
+                            <div >
+                                <Menu   style={centerStyle}  mode="horizontal">
 
-                                <Menu.Item style={{rightStyle}} >
-                                    <div>
-                                        <Affix  target={() => container}>
-                                            <Popover content={content} title="Theme" trigger="click">
+                                    <Menu.Item style={{rightStyle}} >
+                                        <div>
+                                            <Affix  target={() => container}>
+                                                <Popover content={content} title="Theme" trigger="click">
 
-                                                <Button type={'secondary'} shape="circle" icon={<BgColorsOutlined />} size={'large'} />
-                                            </Popover>
-                                        </Affix>
-                                    </div>
-                                </Menu.Item>
+                                                    <Button type={'secondary'} shape="circle" icon={<BgColorsOutlined />} size={'large'} />
+                                                </Popover>
+                                            </Affix>
+                                        </div>
+                                    </Menu.Item>
 
-                            {/*<table style={{width: '40%'}} >*/}
+                                    {/*<table style={{width: '40%'}} >*/}
 
-                            {/*   */}
-                            {/*        /!*<tr style={{"margin-right":'20px'}} >*!/*/}
-                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Balance</th>*!/*/}
-                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Unsettled</th>*!/*/}
-                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Holdings</th>*!/*/}
-                            {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Available</th>*!/*/}
-                            {/*        /!*</tr>*!/*/}
+                                    {/*   */}
+                                    {/*        /!*<tr style={{"margin-right":'20px'}} >*!/*/}
+                                    {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Balance</th>*!/*/}
+                                    {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Unsettled</th>*!/*/}
+                                    {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Holdings</th>*!/*/}
+                                    {/*        /!*    <th  style={{width: '5%', textAlign:'right'}}>Available</th>*!/*/}
+                                    {/*        /!*</tr>*!/*/}
 
-                            {/*        /!*<tr  >*!/*/}
-                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}} >{bal}</td>*!/*/}
-                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>0.00</td>*!/*/}
-                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>0.00</td>*!/*/}
-                            {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>{bal}</td>*!/*/}
-                            {/*        /!*</tr>*!/*/}
+                                    {/*        /!*<tr  >*!/*/}
+                                    {/*        /!*    <td style={{width: '5%', textAlign:'right'}} >{bal}</td>*!/*/}
+                                    {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>0.00</td>*!/*/}
+                                    {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>0.00</td>*!/*/}
+                                    {/*        /!*    <td style={{width: '5%', textAlign:'right'}}>{bal}</td>*!/*/}
+                                    {/*        /!*</tr>*!/*/}
 
-                            {/*    </table>*/}
+                                    {/*    </table>*/}
 
-                                <Menu.Item  >
-                                    <div>
-                                        <Title level={5}>  <h5>Balance</h5></Title>
-                                        <Text  className="p">0.00</Text>
-                                    </div>
-                                </Menu.Item>
+                                    <Menu.Item  >
+                                        <div>
+                                            <Title level={5}>  <h5>Balance</h5></Title>
+                                            <Text  className="p">0.00</Text>
+                                        </div>
+                                    </Menu.Item>
 
-                                <Menu.Item  >
-                                    <div>
-                                        <Title level={5}>     <h5>Unsettled</h5></Title>
-                                        <Text  className="p">0.00</Text>
-                                    </div>
-                                </Menu.Item>
-                                <Menu.Item  >
-                                <div>
-                                    <Title level={5}> <h5>Holdings</h5></Title>
-                                    <Text  className="p">0.00</Text>
+                                    <Menu.Item  >
+                                        <div>
+                                            <Title level={5}>     <h5>Unsettled</h5></Title>
+                                            <Text  className="p">0.00</Text>
+                                        </div>
+                                    </Menu.Item>
+                                    <Menu.Item  >
+                                        <div>
+                                            <Title level={5}> <h5>Holdings</h5></Title>
+                                            <Text  className="p">0.00</Text>
+                                        </div>
+                                    </Menu.Item>
+                                    <Menu.Item  >
+                                        <div>
+                                            <Title level={5}>   <h5>Available</h5></Title>
+                                            <Text  className="p">  0.00</Text>
+                                        </div>
+                                    </Menu.Item>
+                                </Menu>
+                                {/*<Link to="/" style={{margin: '10px'}}>Prices</Link>*/}
+                                {/*<Link to="/orders" style={{margin: '10px'}}>Place Orders</Link>*/}
+                                {/*<Link to="/statement" style={{margin: '10px'}}>Statement</Link>*/}
+                                {/*<Link to="/portfolio" style={{margin: '10px'}}>Portfolio</Link>*/}
+                                {/*<Link to="/pay" style={{margin: '10px'}}>Transfer</Link>*/}
+                                <div  >
+                                    <Menu theme={'dark'}  style={centerStyle2}  onClick={handleClick} selectedKeys={['price']} mode="horizontal">
+
+
+                                        <Menu.Item style={{rightStyle}} >
+                                            <div>
+                                                <Affix  target={() => container}>
+                                                    <Popover content={content2} title="Theme" trigger="click">
+
+                                                        <Button type={'secondary'} shape="circle" icon={<BgColorsOutlined />} size={'large'} />
+                                                    </Popover>
+                                                </Affix>
+                                            </div>
+                                        </Menu.Item>
+                                        <Menu.Item  key="/" icon={<DollarCircleOutlined   />  }>
+
+                                            <Link to='/'> Prices</Link>
+                                        </Menu.Item>
+
+
+                                        <Menu.Item key="/orders"  to="/orders"    icon={<AppstoreOutlined />}>
+
+                                            <Link to={'/orders'}> Place Orders</Link>
+                                        </Menu.Item>
+
+
+
+
+                                        <Menu.Item key="/statement"  icon={<SnippetsOutlined />}>
+                                            <Link to={'/statement'}>  Statement</Link>
+                                        </Menu.Item>
+
+
+
+                                        <Menu.Item key="/portfolio"  icon={<AppstoreOutlined />}>
+                                            <Link to={'/portfolio'}> Portfolio </Link>
+                                        </Menu.Item>
+
+
+                                        <Menu.Item key="/pay"  to="/pay"  icon={<SwapOutlined />}>
+                                            <Link to={'/pay'}>   Pay</Link>
+                                        </Menu.Item>
+
+
+                                    </Menu>
+
                                 </div>
-                            </Menu.Item>
-                                <Menu.Item  >
-                                <div>
-                                    <Title level={5}>   <h5>Available</h5></Title>
-                                    <Text  className="p">  0.00</Text>
-                                </div>
-                            </Menu.Item>
-</Menu>
-                            {/*<Link to="/" style={{margin: '10px'}}>Prices</Link>*/}
-                            {/*<Link to="/orders" style={{margin: '10px'}}>Place Orders</Link>*/}
-                            {/*<Link to="/statement" style={{margin: '10px'}}>Statement</Link>*/}
-                            {/*<Link to="/portfolio" style={{margin: '10px'}}>Portfolio</Link>*/}
-                            {/*<Link to="/pay" style={{margin: '10px'}}>Transfer</Link>*/}
-                       <div  >
-                           <Menu theme={'dark'}  style={centerStyle2}  onClick={handleClick} selectedKeys={['price']} mode="horizontal">
-
-
-                               <Menu.Item style={{rightStyle}} >
-                                  <div>
-                                      <Affix  target={() => container}>
-                                          <Popover content={content2} title="Theme" trigger="click">
-
-                                              <Button type={'secondary'} shape="circle" icon={<BgColorsOutlined />} size={'large'} />
-                                          </Popover>
-                                      </Affix>
-                                  </div>
-                               </Menu.Item>
-                                <Menu.Item  key="/" icon={<DollarCircleOutlined   />  }>
-
-                                    <Link to='/'> Prices</Link>
-                                </Menu.Item>
-
-
-                                <Menu.Item key="/orders"  to="/orders"    icon={<AppstoreOutlined />}>
-
-                                    <Link to={'/orders'}> Place Orders</Link>
-                                </Menu.Item>
-
-
-
-
-                                <Menu.Item key="/statement"  icon={<SnippetsOutlined />}>
-                                    <Link to={'/statement'}>  Statement</Link>
-                                </Menu.Item>
-
-
-
-                                <Menu.Item key="/portfolio"  icon={<AppstoreOutlined />}>
-                                    <Link to={'/portfolio'}> Portfolio </Link>
-                                </Menu.Item>
-
-
-                                <Menu.Item key="/pay"  to="/pay"  icon={<SwapOutlined />}>
-                                    <Link to={'/pay'}>   Pay</Link>
-                                </Menu.Item>
-
-
-                            </Menu>
-
-                       </div>
-                     </div>
+                            </div>
                             <Route exact path="/" component={PricePage} />
                             <Route exact path="/orders" render={(props) => <OrderPage profile={profile}/>} />
                             <Route exact path="/statement" render={(props) => <StatementPage profile={profile}/>} />
@@ -345,7 +386,7 @@ function App(props, context ) {
                             >
 
 
-                                    <Card  style={{ centerStyle }}>
+                                <Card  style={{ centerStyle }}>
 
                                     <FormItem >
                                         <Input
@@ -378,14 +419,14 @@ function App(props, context ) {
                                             onChange={e => setPass(e.target.value)}
                                         />
                                     </FormItem>
-                                        <div className="text-center">
-                                    <Button loading={loading}  type="primary" onClick={e => {
-                                        e.preventDefault();
+                                    <div className="text-center">
+                                        <Button loading={loading}  type="primary" onClick={e => {
+                                            e.preventDefault();
 
-                                        login()
+                                            login()
 
-                                    }}>Login</Button>
-                                        </div>
+                                        }}>Login</Button>
+                                    </div>
                                 </Card>
 
 
